@@ -4,6 +4,22 @@
 
 配套 **React + Vite** 前端，提供聊天式问数界面与 Agent 步骤可视化。
 
+## 主要改进点
+
+本项目基于 [didilili/shopkeeper-agent](https://github.com/didilili/shopkeeper-agent) 进行开发与优化，在保留原项目优秀架构的基础上，针对 Agent 能力和工程化方向进行了以下改进：
+
+- **强化 SQL 自动修正循环（Correction Loop）**  
+  将原项目中“校验失败后仅修正一次”的单次分支，改造为可控的 `validate_sql ⇄ correct_sql` 循环，并通过 `max_correction_attempts` 限制最大修正次数（默认 3）。新增 `sql_correction_failed` 节点，在达到最大次数后优雅返回结构化错误信息，提升了 SQL 生成的鲁棒性。
+
+- **多轮对话与状态管理优化**  
+  进一步完善了基于 LangGraph `MemorySaver` 的持久化机制，优化了 `rewrite_query` 节点的上下文改写逻辑，使多轮追问体验更稳定。
+
+- **元数据知识库构建工程化改进**  
+  封装了知识库清理与重建方法，支持在构建前清理 Qdrant、Elasticsearch 和 MySQL 中的旧数据，避免重复构建导致的数据混乱，提升了知识库构建的安全性和可重复性。
+
+- **代码结构与验证能力增强**  
+  对部分模块进行了职责梳理，增加验证脚本（`verify_correction_loop.py`、`verify_multi_turn.py`），便于后续迭代和问题排查。
+
 ## 功能特性
 
 - **NL2SQL 全流程**：关键词抽取 → 多路召回 → 表/指标过滤 → SQL 生成 → EXPLAIN 校验 → 自动修正 → 执行查询
@@ -168,6 +184,8 @@ uv run python scripts/verify_multi_turn.py
 - `docker/embedding/` 下的本地 Embedding 模型（约 1.2GB）已被 `.gitignore` 忽略；当前默认使用云端 Embedding API
 - Qdrant / ES / MySQL 数据通过 Docker Volume 持久化，不会进入 Git 仓库
 - 上传代码前请确认 `.env` 未被跟踪：`git status` 中不应出现 `.env`
+
+**特别感谢** 原作者 [didilili](https://github.com/didilili) 提供的优秀开源项目和配套教程。
 
 ## License
 
