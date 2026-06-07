@@ -1,0 +1,133 @@
+# =========================
+# Python
+# =========================
+.venv/
+venv/
+env/
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+/lib/
+/lib64/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+pip-wheel-metadata/
+
+# 测试 / 类型检查 / 格式化缓存
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+.tox/
+.nox/
+coverage.xml
+*.cover
+.hypothesis/
+
+# =========================
+# 环境与密钥（切勿提交）
+# =========================
+.env
+.env.*
+!.env.example
+!.env.*.example
+docker/.env
+*.pem
+*.key
+credentials.json
+secrets.yaml
+secrets.yml
+
+# =========================
+# 日志
+# =========================
+logs/
+*.log
+app/agent/logs/
+app/agent/nodes/logs/
+
+# =========================
+# IDE / 编辑器
+# =========================
+.idea/
+.vscode/
+.cursor/
+*.swp
+*.swo
+*~
+.jbeval/
+
+# =========================
+# 前端 (React + Vite)
+# =========================
+node_modules/
+frontend/node_modules/
+frontend/dist/
+frontend/.vite/
+frontend/*.tsbuildinfo
+frontend/.env.local
+
+# =========================
+# 向量库 / 本地数据 / 缓存
+# =========================
+chroma_db/
+qdrant_storage/
+qdrant_data/
+*.pkl
+chunks.pkl
+*.sqlite
+*.sqlite3
+*.db
+
+# 模型权重（体积大）
+*.bin
+*.safetensors
+*.onnx
+*.pt
+*.pth
+
+# =========================
+# Docker / 模型文件（体积大，本地下载）
+# =========================
+docker/embedding/
+docker/**/.cache/
+docker/**/data/
+
+# HuggingFace 缓存
+.cache/
+**/.cache/huggingface/
+
+# =========================
+# 操作系统
+# =========================
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+Desktop.ini
+
+# =========================
+# 其他
+# =========================
+*.bak
+*.tmp
+*.temp

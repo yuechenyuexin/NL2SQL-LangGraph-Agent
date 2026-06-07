@@ -1,0 +1,50 @@
+logging:
+  file:
+    enable: true
+    level: INFO
+    path: logs
+    rotation: "10 MB"
+    retention: "7 days"
+  console:
+    enable: true
+    level: INFO
+
+db_meta:
+  host: 127.0.0.1
+  port: 3306
+  user: ${oc.env:MYSQL_USER,shopkeeper}
+  password: ${oc.env:MYSQL_PASSWORD,changeme}
+  database: meta
+
+db_dw:
+  host: 127.0.0.1
+  port: 3306
+  user: ${oc.env:MYSQL_USER,shopkeeper}
+  password: ${oc.env:MYSQL_PASSWORD,changeme}
+  database: dw
+
+qdrant:
+  host: localhost
+  port: 6333
+  embedding_size: 1024
+
+embedding:
+#  host: localhost
+#  port: 8081
+  model: BAAI/bge-large-zh-v1.5
+  base_url: https://api.siliconflow.cn/v1
+  api_key: ${oc.env:EMBEDDING_API_KEY}
+
+es:
+  host: localhost
+  port: 9200
+  index_name: data_agent
+
+llm:
+  model_name: deepseek-ai/DeepSeek-V4-Pro
+  api_key: ${oc.env:LLM_API_KEY}
+  base_url: "https://api.siliconflow.cn/v1"
+
+agent:
+  # SQL 校验失败后，最多允许 LLM 修正几次（每次修正后都会回环 EXPLAIN 校验）
+  max_correction_attempts: 3
